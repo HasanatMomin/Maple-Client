@@ -2,30 +2,30 @@ package com.beluuu.onehit;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.client.gui.GuiGraphics;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-/**
- * স্ক্রিনের মাঝখানে দেখাবে "One-Hit: ON" বা "OFF"
- * যা player আবার I চাপা পর্যন্ত থাকবে
- */
+@EventBusSubscriber(modid = "onehitmod", value = Dist.CLIENT)
 public class CenterPopup {
 
     @SubscribeEvent
-    public void onRender(RenderGameOverlayEvent.Text event) {
-        Minecraft mc = Minecraft.getInstance();
-        Font font = mc.font;
-        int screenWidth = mc.getWindow().getScaledWidth();
-        int screenHeight = mc.getWindow().getScaledHeight();
+    public void onRenderGui(RenderGuiLayerEvent.Post event) {
+        // শুধুমাত্র হটবার লেয়ারের পর টেক্সট রেন্ডার করবে
+        if (event.getName().equals(VanillaGuiLayers.HOTBAR)) {
+            Minecraft mc = Minecraft.getInstance();
+            Font font = mc.font;
+            GuiGraphics graphics = event.getGuiGraphics();
 
-        if (OneHitMod.ONE_HIT_ENABLED) {
-            String status = "One-Hit: ON";
-            int textWidth = font.getWidth(status);
-            font.draw(event.getMatrixStack(), status, (screenWidth - textWidth) / 2, screenHeight / 2, 0xFFFF0000);
-        } else {
-            String status = "One-Hit: OFF";
-            int textWidth = font.getWidth(status);
-            font.draw(event.getMatrixStack(), status, (screenWidth - textWidth) / 2, screenHeight / 2, 0xFFAAAAAA);
+            String status = "One-Hit: " + (OneHitMod.ONE_HIT_ENABLED ? "§aON" : "§cOFF");
+            
+            int x = graphics.guiWidth() / 2 - font.width(status) / 2;
+            int y = graphics.guiHeight() / 2 + 20; // স্ক্রিনের মাঝের কিছুটা নিচে
+
+            graphics.drawString(font, status, x, y, 0xFFFFFFFF, true);
         }
     }
 }
