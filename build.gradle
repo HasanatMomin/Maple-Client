@@ -26,7 +26,7 @@ neoForge {
 
     parchment {
         // ১.২১.১১ এর জন্য সরাসরি স্ট্রিং হিসেবে ভার্সন দিয়ে দিচ্ছি যাতে এরর না আসে
-        minecraftVersion = "1.21.11"
+        minecraftVersion = "1.21.1"
         mappingsVersion = "2024.07.28"
     }
 
