@@ -1,32 +1,31 @@
 package com.beluuu.onehit;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-/**
- * NeoForge 1.21.11 One-Hit Everything Mod
- * Player একবার আঘাত করলে সব Entity মারা যাবে
- */
 @Mod("onehitmod")
 public class OneHitMod {
 
-    public static boolean ONE_HIT_ENABLED = false; // Toggle ON/OFF
+    public static boolean ONE_HIT_ENABLED = false;
 
     public OneHitMod() {
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new KeyHandler());
-        MinecraftForge.EVENT_BUS.register(new CenterPopup());
+        // NeoForge এর ইভেন্ট বাস ব্যবহার করুন
+        NeoForge.EVENT_BUS.register(this);
+        // আপনার অন্য ক্লাসগুলোকেও একইভাবে রেজিস্টার করতে হবে
+        // NeoForge.EVENT_BUS.register(new KeyHandler());
     }
 
     @SubscribeEvent
-    public void onAttack(AttackEntityEvent event) {
-        if (ONE_HIT_ENABLED && event.getTarget() instanceof LivingEntity living) {
-            PlayerEntity player = event.getPlayer();
-            living.hurt(player.damageSources().playerAttack(player), Float.MAX_VALUE);
+    public void onAttack(LivingIncomingDamageEvent event) {
+        if (!ONE_HIT_ENABLED) return;
+
+        // চেক করা হচ্ছে ড্যামেজ প্লেয়ার থেকে আসছে কি না
+        if (event.getSource().getEntity() instanceof Player) {
+            event.setAmount(99999.0F); // এক আঘাতেই কেল্লাফতে
         }
     }
 }
