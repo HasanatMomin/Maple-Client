@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.101'
+    id 'net.neoforged.moddev' version '2.0.78'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -22,7 +22,7 @@ java {
 neoForge {
     version = project.neo_version
     
-    // ১.২১.১১ এর জিপ এরর ফিক্স করতে এটি যোগ করা হয়েছে
+    // ১.২১.১১ এর জন্য এটি খুব জরুরি
     validateAccessTransformers = false
 
     runs {
