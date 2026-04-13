@@ -3,7 +3,6 @@ package com.beluuu.onehit;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -18,7 +17,7 @@ public class KeyHandler {
             "key.onehit.toggle",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_I,
-            KeyMapping.CATEGORY_MISC
+            "key.categories.onehit"
     );
 
     @SubscribeEvent
