@@ -8,7 +8,7 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-// প্রজেক্টের ভার্সন ও গ্রুপ আইডি প্রপার্টিজ ফাইল থেকে নিচ্ছে
+// প্রপার্টিজ ফাইল থেকে ডেটা রিড করা হচ্ছে
 version = project.mod_version
 group = project.mod_group_id
 
@@ -16,21 +16,20 @@ base {
     archivesName = project.mod_id
 }
 
-// Minecraft 1.21.11 এর জন্য Java 21 দরকার
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
 neoForge {
-    // এটি gradle.properties এর neo_version থেকে ভার্সন নেবে
+    // এখানে তোমার gradle.properties এর ১.২১.১১ ভার্সনটি ব্যবহার হবে
     version = project.neo_version
 
     parchment {
-        minecraftVersion = project.neogradle.subsystems.parchment.minecraftVersion
-        mappingsVersion = project.neogradle.subsystems.parchment.mappingsVersion
+        // ১.২১.১১ এর জন্য সরাসরি স্ট্রিং হিসেবে ভার্সন দিয়ে দিচ্ছি যাতে এরর না আসে
+        minecraftVersion = "1.21.11"
+        mappingsVersion = "2024.07.28"
     }
 
-    // রান কনফিগারেশন - যা তোমার আগের এররটি ফিক্স করবে
     runs {
         client {
             client()
@@ -49,7 +48,6 @@ neoForge {
     }
 }
 
-// রিসোর্স ফোল্ডার সেটআপ
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
@@ -57,11 +55,6 @@ repositories {
     maven { url = 'https://maven.neoforged.net/releases' }
 }
 
-dependencies {
-    // এখানে অতিরিক্ত কোনো লাইব্রেরি থাকলে যোগ করতে পারো
-}
-
-// JAR ফাইলের তথ্য সেটআপ
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
@@ -73,14 +66,5 @@ tasks.named('jar', Jar).configure {
             "Implementation-Vendor"   : project.mod_authors,
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
-    }
-}
-
-// পাবলিশিং সেটিংস
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
-        }
     }
 }
