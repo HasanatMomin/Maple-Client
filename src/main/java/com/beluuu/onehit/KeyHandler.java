@@ -17,7 +17,7 @@ public class KeyHandler {
             "key.onehit.toggle",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_I,
-            "key.categories.onehit"
+            KeyMapping.Category.MISC
     );
 
     @SubscribeEvent
