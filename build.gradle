@@ -8,7 +8,6 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-// প্রপার্টিজ ফাইল থেকে ডেটা রিড করা হচ্ছে
 version = project.mod_version
 group = project.mod_group_id
 
@@ -21,14 +20,11 @@ java {
 }
 
 neoForge {
-    // এখানে তোমার gradle.properties এর ১.২১.১১ ভার্সনটি ব্যবহার হবে
+    // এটি তোমার gradle.properties এর ১.২১.১১ ভার্সনটি ব্যবহার করবে
     version = project.neo_version
 
-    parchment {
-        // ১.২১.১১ এর জন্য সরাসরি স্ট্রিং হিসেবে ভার্সন দিয়ে দিচ্ছি যাতে এরর না আসে
-        minecraftVersion = "1.21.1"
-        mappingsVersion = "2024.07.28"
-    }
+    // Parchment ব্লকটি সরিয়ে দেওয়া হয়েছে কারণ এটি সার্ভারে পাওয়া যাচ্ছে না।
+    // এখন এটি ডিফল্ট Mojang ম্যাপ ব্যবহার করবে যা ১.২১.১১ এর জন্য পারফেক্ট।
 
     runs {
         client {
