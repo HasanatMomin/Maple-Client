@@ -12,12 +12,11 @@ import org.lwjgl.glfw.GLFW;
 @EventBusSubscriber(modid = "onehitmod", value = Dist.CLIENT)
 public class KeyHandler {
 
-    // ৩টি প্যারামিটার: নাম, কী-কোড, এবং ক্যাটাগরি (String হিসেবে)
-    // অনেক সময় String ক্যাটাগরি সরাসরি কাজ করে যদি সঠিক কন্সট্রাক্টর থাকে
+    // এখানে String এর বদলে KeyMapping.Category.MISC ব্যবহার করা হয়েছে
     public static final KeyMapping TOGGLE_KEY = new KeyMapping(
             "key.onehit.toggle", 
             GLFW.GLFW_KEY_I, 
-            "key.categories.misc"
+            KeyMapping.CATEGORY_MISC // String এর বদলে সরাসরি Category অবজেক্ট
     );
 
     @SubscribeEvent
