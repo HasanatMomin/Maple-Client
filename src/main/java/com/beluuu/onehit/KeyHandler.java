@@ -16,8 +16,7 @@ public class KeyHandler {
     public static final KeyMapping TOGGLE_KEY = new KeyMapping(
             "key.onehit.toggle",
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_I,
-            "key.categories.onehit"
+            GLFW.GLFW_KEY_I
     );
 
     @SubscribeEvent
