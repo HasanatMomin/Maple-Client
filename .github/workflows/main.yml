@@ -21,5 +21,5 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        # assemble কমান্ডটি দ্রুত এবং জিপ এরর হওয়ার চান্স কম থাকে
-        run: ./gradlew assemble --no-daemon --stacktrace
+        # সব এরর দূর করতে ফ্রেশ বিল্ড
+        run: ./gradlew build --no-daemon --no-build-cache
