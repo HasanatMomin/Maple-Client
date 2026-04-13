@@ -21,11 +21,5 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        # --no-build-cache যোগ করা হয়েছে ফিক্স হিসেবে
-        run: ./gradlew build --no-daemon --no-build-cache
-
-      - name: Upload JAR
-        uses: actions/upload-artifact@v4
-        with:
-          name: OneHit-Mod-JAR-1.21.11
-          path: build/libs/*.jar
+        # 'assemble' ব্যবহার করছি হালকা বিল্ডের জন্য
+        run: ./gradlew assemble --no-daemon --stacktrace --info
