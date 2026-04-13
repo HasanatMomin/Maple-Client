@@ -1,0 +1,9 @@
+modLoader="javafml"
+loaderVersion="[61,)"
+license="MIT"
+
+[[mods]]
+modId="onehitmod"
+version="1.0.0"
+displayName="NeoForge OneHit Mod"
+description='Toggleable one-hit everything mod for NeoForge 1.21.11'
