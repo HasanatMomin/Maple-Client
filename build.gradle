@@ -20,11 +20,9 @@ java {
 }
 
 neoForge {
-    // এটি তোমার gradle.properties এর ১.২১.১১ ভার্সনটি ব্যবহার করবে
     version = project.neo_version
-
-    // Parchment ব্লকটি সরিয়ে দেওয়া হয়েছে কারণ এটি সার্ভারে পাওয়া যাচ্ছে না।
-    // এখন এটি ডিফল্ট Mojang ম্যাপ ব্যবহার করবে যা ১.২১.১১ এর জন্য পারফেক্ট।
+    // বিল্ডের সময় এটি ফাইল ভ্যালিডেশন চেক করবে
+    validateAccessTransformers = true
 
     runs {
         client {
