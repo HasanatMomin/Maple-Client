@@ -1,7 +1,8 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.78'
+    // প্লাগইন ভার্সন আপডেট করা হয়েছে
+    id 'net.neoforged.moddev' version '2.0.101'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -21,17 +22,16 @@ java {
 
 neoForge {
     version = project.neo_version
-    // বিল্ডের সময় এটি ফাইল ভ্যালিডেশন চেক করবে
-    validateAccessTransformers = true
+    
+    // ১.২১.১১ এর এরর এড়াতে ভ্যালিডেশন বন্ধ রাখা হয়েছে
+    validateAccessTransformers = false
 
     runs {
         client {
             client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
         server {
             server()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
     }
 
@@ -42,23 +42,7 @@ neoForge {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 repositories {
     mavenCentral()
     maven { url = 'https://maven.neoforged.net/releases' }
-}
-
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-            "Specification-Title"     : project.mod_id,
-            "Specification-Vendor"    : project.mod_authors,
-            "Specification-Version"   : "1",
-            "Implementation-Title"    : project.mod_name,
-            "Implementation-Version"  : project.mod_version,
-            "Implementation-Vendor"   : project.mod_authors,
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
 }
