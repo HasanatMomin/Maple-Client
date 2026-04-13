@@ -1,6 +1,5 @@
 package com.beluuu.onehit;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
@@ -13,10 +12,12 @@ import org.lwjgl.glfw.GLFW;
 @EventBusSubscriber(modid = "onehitmod", value = Dist.CLIENT)
 public class KeyHandler {
 
+    // ৩টি প্যারামিটার: নাম, কী-কোড, এবং ক্যাটাগরি (String হিসেবে)
+    // অনেক সময় String ক্যাটাগরি সরাসরি কাজ করে যদি সঠিক কন্সট্রাক্টর থাকে
     public static final KeyMapping TOGGLE_KEY = new KeyMapping(
-            "key.onehit.toggle",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_I
+            "key.onehit.toggle", 
+            GLFW.GLFW_KEY_I, 
+            "key.categories.misc"
     );
 
     @SubscribeEvent
