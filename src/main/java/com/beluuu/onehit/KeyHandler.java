@@ -2,22 +2,22 @@ package com.beluuu.onehit;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
 
-@EventBusSubscriber(modid = "onehitmod", value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = "onehitmod", value = Dist.CLIENT)
 public class KeyHandler {
 
-    // NeoForge 1.21.x এর জন্য সঠিক কনস্ট্রাক্টর
     public static final KeyMapping TOGGLE_KEY = new KeyMapping(
-            "key.onehitmod.toggle",
+            "key.onehit.toggle",
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_O, // 'O' বাটন দিয়ে অন/অফ হবে
-            "key.categories.misc"
+            GLFW.GLFW_KEY_I,
+            "key.categories.onehit"
     );
 
     @SubscribeEvent
@@ -25,14 +25,12 @@ public class KeyHandler {
         event.register(TOGGLE_KEY);
     }
 
-    // গেম চলাকালীন ইনপুট চেক করার জন্য
-    @EventBusSubscriber(modid = "onehitmod", value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
-    public static class InputHandler {
-        @SubscribeEvent
-        public static void onKeyInput(InputEvent.Key event) {
-            while (TOGGLE_KEY.consumeClick()) {
-                OneHitMod.ONE_HIT_ENABLED = !OneHitMod.ONE_HIT_ENABLED;
-            }
+    @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event) {
+        if (Minecraft.getInstance().player == null) return;
+
+        while (TOGGLE_KEY.consumeClick()) {
+            OneHitMod.ONE_HIT_ENABLED = !OneHitMod.ONE_HIT_ENABLED;
         }
     }
 }
