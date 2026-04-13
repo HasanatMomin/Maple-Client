@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.78'
+    id 'net.neoforged.moddev' version '2.0.141'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -22,15 +22,12 @@ java {
 neoForge {
     version = project.neo_version
     
-    // সেফটি মেজার হিসেবে এটি false রাখছি
+    // ১.২১.১১ এ টুলিং এরর এড়াতে এটি রাখা ভালো
     validateAccessTransformers = false
 
     runs {
         client {
             client()
-        }
-        server {
-            server()
         }
     }
 
