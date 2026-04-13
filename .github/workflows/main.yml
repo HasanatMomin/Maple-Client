@@ -21,11 +21,11 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        # সঠিক ভার্সন থাকলে এখন আর ক্যাশ ক্লিয়ার করার প্রয়োজন নেই
-        run: ./gradlew build --no-daemon
+        # assemble কমান্ডটি এই প্লাগইনের সাথে খুব ভালো কাজ করে
+        run: ./gradlew assemble --no-daemon
 
-      - name: Upload Mod JAR
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
-          name: OneHit-Mod-JAR-1.21.11
+          name: Maple-Client-1.21.11
           path: build/libs/*.jar
